@@ -51,9 +51,6 @@ public class FullscreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_fullscreen);
-		// test ajax
-		HttpTask task = new HttpTask();
-		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", "7071355145",	"test sms" });
 		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -168,6 +165,13 @@ public class FullscreenActivity extends Activity {
 	public void click(View view) {
 		// test ajax
 		HttpTask task = new HttpTask();
-		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", "7071355145",	"test sms" });		
+		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
+				"{\"number\": \"7071355145\",  \"password\": \"756489\"}", "cook" });	
+		/*
+		 * // test ajax
+		HttpTask task = new HttpTask();
+		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", "7071355145",	"test sms" });
+		"{\"msisdn\": \"7071355145\",  \"message\": \"test sms me\"}"
+		 */
 	}
 }

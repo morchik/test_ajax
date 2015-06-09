@@ -5,10 +5,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 public class HttpClient {
@@ -75,6 +79,26 @@ public class HttpClient {
 			getPOSTResponse = builder.toString();
 			// logger.debug("\n "+getPOSTResponse);
 
+			final String COOKIES_HEADER = "Set-Cookie";
+			
+			java.net.CookieManager msCookieManager = new java.net.CookieManager();
+
+			Map<String, List<String>> headerFields = urlConn.getHeaderFields();
+			List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+
+			if(cookiesHeader != null)
+			{
+			    for (String cookie : cookiesHeader) 
+			    {
+			      msCookieManager.getCookieStore().add(null,HttpCookie.parse(cookie).get(0));
+			    }               
+			}
+			if(msCookieManager.getCookieStore().getCookies().size() > 0)
+			{
+				Log.d("HttpClient2", TextUtils.join(",",  msCookieManager.getCookieStore().getCookies()));
+			    //connection.setRequestProperty("Cookie",
+			    	//TextUtils.join(",",  msCookieManager.getCookieStore().getCookies()));   
+			}
 			// Disconnect the connection
 			urlConn.disconnect();
 
