@@ -5,14 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Map;
-
-import android.text.TextUtils;
 import android.util.Log;
 
 public class HttpClient {
@@ -73,7 +68,7 @@ public class HttpClient {
 			reader.close();
 			getPOSTResponse = builder.toString();
 			// logger.debug("\n "+getPOSTResponse);
-
+/*
 			final String COOKIES_HEADER = "Set-Cookie";
 			
 			java.net.CookieManager msCookieManager = new java.net.CookieManager();
@@ -94,6 +89,7 @@ public class HttpClient {
 			    //connection.setRequestProperty("Cookie",
 			    	//TextUtils.join(",",  msCookieManager.getCookieStore().getCookies()));   
 			}
+*/
 			// Disconnect the connection
 			urlConn.disconnect();
 

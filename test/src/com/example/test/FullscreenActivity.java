@@ -1,5 +1,8 @@
 package com.example.test;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+
 import com.example.test.util.SystemUiHider;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -9,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -164,15 +168,17 @@ public class FullscreenActivity extends Activity {
 	
 	public void click(View view) {
 		// test ajax
-		/*
+		CookieManager cookieManager = new CookieManager();
+		CookieHandler.setDefault(cookieManager);
+		
 		HttpTask task = new HttpTask();
 		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
-				"{\"number\": \"7071355145\",  \"password\": \"756489\"}", null });	
-		*/
+				"{\"number\": \"7072282999\",  \"password\": \"756489\"}", null });	
+		
 		HttpTask task2 = new HttpTask();
 		task2.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", 
-		"{\"msisdn\": \"7071355145\",  \"message\": \"test sms me\"}", 
-		"ASP.NET_SessionId=ki4pdjxfu5hpp3ke0zwigvid"});
+		"{\"msisdn\": \"7071355145\",  \"message\": \"I test sms me 234 \"}", null});
+		//"ASP.NET_SessionId=ki4pdjxfu5hpp3ke0zwigvid"});
  
 	}
 }
