@@ -163,4 +163,11 @@ public class FullscreenActivity extends Activity {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
+	
+	
+	public void click(View view) {
+		// test ajax
+		HttpTask task = new HttpTask();
+		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", "7071355145",	"test sms" });		
+	}
 }
