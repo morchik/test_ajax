@@ -1,7 +1,7 @@
 package com.example.test;
 
 import com.example.test.util.SystemUiHider;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -16,6 +16,7 @@ import android.view.View;
  * 
  * @see SystemUiHider
  */
+@SuppressLint("ClickableViewAccessibility")
 public class FullscreenActivity extends Activity {
 	/**
 	 * Whether or not the system UI should be auto-hidden after
@@ -50,7 +51,10 @@ public class FullscreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_fullscreen);
-
+		// test ajax
+		HttpTask task = new HttpTask();
+		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", "7071355145",	"test sms" });
+		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 
