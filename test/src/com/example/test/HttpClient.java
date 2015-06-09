@@ -17,14 +17,11 @@ import android.util.Log;
 
 public class HttpClient {
 
-	public String getPOSTAJAX(String getURL, String impersonationID,
-			String getPOSTParameters) {
+	public String getPOSTAJAX(String getURL, String getPOSTParameters, String postCookies) {
 
 		// get Impersonation ID
-		String getimpersonationID = "bearer " + impersonationID;
 		String getResponseline = "";
 		String getPOSTResponse = null;
-		String postCookies = "sid=" + impersonationID;
 
 		try {
 			// Open HttpURLConnection
@@ -32,9 +29,7 @@ public class HttpClient {
 			HttpURLConnection urlConn = (HttpURLConnection) url
 					.openConnection();
 			// add request header
-			if (impersonationID != null && impersonationID != " ") {
-				urlConn.setRequestProperty("Authorization", getimpersonationID);
-				urlConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
+			if (postCookies != null && postCookies != " ") {
 				urlConn.setRequestProperty("Cookie", postCookies);
 			}
 			urlConn.setRequestProperty("Accept",
@@ -51,7 +46,7 @@ public class HttpClient {
 			urlConn.setRequestProperty("Content-Length",
 					String.valueOf(getPOSTParameters.getBytes().length));
 			urlConn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-
+			
 			// send the POSt Request
 			urlConn.setDoOutput(true);
 			urlConn.setDoInput(true);
