@@ -23,14 +23,16 @@ public class HttpClient {
 			URL url = new URL(getURL);
 			HttpURLConnection urlConn = (HttpURLConnection) url
 					.openConnection();
-			
+
 			urlConn.setRequestProperty("Accept",
 					"application/json,text/plain,*/*");
 			urlConn.setRequestProperty("Accept-Language", "en-US,en;q=0.8");
 			urlConn.setRequestProperty("Connection", "keep-alive");
-			urlConn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-			//setRequestProperty("Content-Type",	"application/x-www-form-urlencoded; charset=UTF-8");
-			
+			urlConn.setRequestProperty("Content-Type",
+					"application/json; charset=utf-8");
+			// setRequestProperty("Content-Type",
+			// "application/x-www-form-urlencoded; charset=UTF-8");
+
 			urlConn.setRequestProperty(
 					"User-Agent",
 					"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36");
@@ -38,7 +40,7 @@ public class HttpClient {
 			urlConn.setRequestProperty("Content-Length",
 					String.valueOf(getPOSTParameters.getBytes().length));
 			urlConn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-			
+
 			// send the POSt Request
 			urlConn.setDoOutput(true);
 			urlConn.setDoInput(true);
@@ -65,28 +67,25 @@ public class HttpClient {
 			reader.close();
 			getPOSTResponse = builder.toString();
 			// logger.debug("\n "+getPOSTResponse);
-/*
-			final String COOKIES_HEADER = "Set-Cookie";
-			
-			java.net.CookieManager msCookieManager = new java.net.CookieManager();
-
-			Map<String, List<String>> headerFields = urlConn.getHeaderFields();
-			List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-
-			if(cookiesHeader != null)
-			{
-			    for (String cookie : cookiesHeader) 
-			    {
-			      msCookieManager.getCookieStore().add(null,HttpCookie.parse(cookie).get(0));
-			    }               
-			}
-			if(msCookieManager.getCookieStore().getCookies().size() > 0)
-			{
-				Log.d("HttpClient2", TextUtils.join(",",  msCookieManager.getCookieStore().getCookies()));
-			    //connection.setRequestProperty("Cookie",
-			    	//TextUtils.join(",",  msCookieManager.getCookieStore().getCookies()));   
-			}
-*/
+			/*
+			 * final String COOKIES_HEADER = "Set-Cookie";
+			 * 
+			 * java.net.CookieManager msCookieManager = new
+			 * java.net.CookieManager();
+			 * 
+			 * Map<String, List<String>> headerFields =
+			 * urlConn.getHeaderFields(); List<String> cookiesHeader =
+			 * headerFields.get(COOKIES_HEADER);
+			 * 
+			 * if(cookiesHeader != null) { for (String cookie : cookiesHeader) {
+			 * msCookieManager
+			 * .getCookieStore().add(null,HttpCookie.parse(cookie).get(0)); } }
+			 * if(msCookieManager.getCookieStore().getCookies().size() > 0) {
+			 * Log.d("HttpClient2", TextUtils.join(",",
+			 * msCookieManager.getCookieStore().getCookies()));
+			 * //connection.setRequestProperty("Cookie", //TextUtils.join(",",
+			 * msCookieManager.getCookieStore().getCookies())); }
+			 */
 			// Disconnect the connection
 			urlConn.disconnect();
 

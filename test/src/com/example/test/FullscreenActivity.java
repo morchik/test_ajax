@@ -5,6 +5,8 @@ import java.net.CookieManager;
 import java.util.concurrent.ExecutionException;
 
 import com.example.test.util.SystemUiHider;
+
+import android.R;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -78,16 +80,18 @@ public class FullscreenActivity extends Activity {
 		b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
-		String s_temp = PrefActivity.getStringInDefaultLocale(R.string.text_status, this);
+		String s_temp = PrefActivity.getStringInDefaultLocale(
+				R.string.text_status, this);
 		String text = s_temp.replace("7072282999", sy_phone);
 		tvStatus.setText(text);
 		if (b_debug)
-			tvDebug.setText(sy_phone+" "+sy_pass+"\n"+tvDebug.getText().toString());		
-		if (edNumber.getEditableText().toString().equalsIgnoreCase("")){
+			tvDebug.setText(sy_phone + " " + sy_pass + "\n"
+					+ tvDebug.getText().toString());
+		if (edNumber.getEditableText().toString().equalsIgnoreCase("")) {
 			String ssend_phone = sp.getString("s_phone", "");
 			edNumber.setText(ssend_phone);
 		}
-			
+
 		super.onResume();
 	}
 
@@ -238,13 +242,13 @@ public class FullscreenActivity extends Activity {
 
 			try {
 				SystemClock.sleep(500);
-				Toast.makeText(
-						this,
-						"resp="+task2.get()+task2.get(),
+				Toast.makeText(this, "resp=" + task2.get() + task2.get(),
 						Toast.LENGTH_SHORT).show();
-				if (b_debug){
-					tvDebug.setText(task.get()+"\n"+tvDebug.getText().toString());
-					tvDebug.setText(task2.get()+"\n"+tvDebug.getText().toString());					
+				if (b_debug) {
+					tvDebug.setText(task.get() + "\n"
+							+ tvDebug.getText().toString());
+					tvDebug.setText(task2.get() + "\n"
+							+ tvDebug.getText().toString());
 				}
 			} catch (InterruptedException | ExecutionException e) {
 				Log.e("click", e.toString());

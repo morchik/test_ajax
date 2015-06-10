@@ -16,20 +16,20 @@ public class PrefActivity extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.pref);
 	}
-	
-	public static  String getStringInDefaultLocale(int resId, Activity act) {
-	    Resources currentResources = act.getResources();
-	    AssetManager assets = currentResources.getAssets();
-	    DisplayMetrics metrics = currentResources.getDisplayMetrics();
-	    Configuration config = new Configuration(
-	            currentResources.getConfiguration());
-	    config.locale = act.getResources().getConfiguration().locale;
-	   
-	    Resources defaultLocaleResources = new Resources(assets, metrics,
-	            config);
-	    String string = defaultLocaleResources.getString(resId);
-	    // Restore device-specific locale
-	    new Resources(assets, metrics, currentResources.getConfiguration());
-	    return string;
+
+	public static String getStringInDefaultLocale(int resId, Activity act) {
+		Resources currentResources = act.getResources();
+		AssetManager assets = currentResources.getAssets();
+		DisplayMetrics metrics = currentResources.getDisplayMetrics();
+		Configuration config = new Configuration(
+				currentResources.getConfiguration());
+		config.locale = act.getResources().getConfiguration().locale;
+
+		Resources defaultLocaleResources = new Resources(assets, metrics,
+				config);
+		String string = defaultLocaleResources.getString(resId);
+		// Restore device-specific locale
+		new Resources(assets, metrics, currentResources.getConfiguration());
+		return string;
 	}
 }
