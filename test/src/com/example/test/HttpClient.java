@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class HttpClient {
 
-	public String getPOSTAJAX(String getURL, String getPOSTParameters, String postCookies) {
+	public String getPOSTAJAX(String getURL, String getPOSTParameters) {
 
 		// get Impersonation ID
 		String getResponseline = "";
@@ -23,10 +23,7 @@ public class HttpClient {
 			URL url = new URL(getURL);
 			HttpURLConnection urlConn = (HttpURLConnection) url
 					.openConnection();
-			// add request header
-			if (postCookies != null && postCookies != " ") {
-				urlConn.setRequestProperty("Cookie", postCookies);
-			}
+			
 			urlConn.setRequestProperty("Accept",
 					"application/json,text/plain,*/*");
 			urlConn.setRequestProperty("Accept-Language", "en-US,en;q=0.8");

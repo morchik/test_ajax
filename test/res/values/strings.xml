@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">test</string>
-    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_button">Send Sms</string>
     <string name="dummy_content">Hi</string>
-    <string name="text_number">Phone number:</string>
+    <string name="text_number">Phone\nnumber:</string>
     <string name="text_message">SMS message:</string>
-   <string name="text_hint_number">7071234567</string>
-    
+    <string name="text_hint_number">7071234567</string>
+
 </resources>

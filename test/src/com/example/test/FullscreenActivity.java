@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 
 
 /**
@@ -49,7 +50,8 @@ public class FullscreenActivity extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
-
+	private  EditText edNumber, edMessage;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +60,9 @@ public class FullscreenActivity extends Activity {
 		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
-
+		edNumber = (EditText) findViewById(R.id.edNumber);
+		edMessage = (EditText) findViewById(R.id.edMessage);
+		
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
@@ -173,11 +177,15 @@ public class FullscreenActivity extends Activity {
 		
 		HttpTask task = new HttpTask();
 		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
-				"{\"number\": \"7072282999\",  \"password\": \"756489\"}", null });	
+				"{\"number\": \"7072282999\",  \"password\": \"756489\"}" });	
 		
 		HttpTask task2 = new HttpTask();
 		task2.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", 
-		"{\"msisdn\": \"7071355145\",  \"message\": \"I test sms me 234 \"}", null});
+		"{\"msisdn\": \"" 
+				+edNumber.getEditableText().toString()
+				+ "\",  \"message\": \"" 
+				+edMessage.getEditableText().toString()
+				+ "\"}"});
 		//"ASP.NET_SessionId=ki4pdjxfu5hpp3ke0zwigvid"});
  
 	}
