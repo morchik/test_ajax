@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -104,7 +105,7 @@ public class FullscreenActivity extends Activity {
 
 		tvStatus = (TextView) findViewById(R.id.tvStatus);
 		tvDebug = (TextView) findViewById(R.id.tvDebug);
-
+		tvDebug.setMovementMethod(new ScrollingMovementMethod());
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
@@ -236,8 +237,12 @@ public class FullscreenActivity extends Activity {
 
 			try {
 				SystemClock.sleep(500);
-				tvDebug.setText(task.get()+"\n"+tvDebug.toString());
-				tvDebug.setText(task2.get()+"\n"+tvDebug.toString());
+				Toast.makeText(
+						this,
+						"resp="+task2.get(),
+						Toast.LENGTH_SHORT).show();
+				tvDebug.setText(task.get()+"\n"+tvDebug.getText().toString());
+				tvDebug.setText(task2.get()+"\n"+tvDebug.getText().toString());
 			} catch (InterruptedException | ExecutionException e) {
 				Log.e("click", e.toString());
 				e.printStackTrace();
