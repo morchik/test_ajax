@@ -1733,7 +1733,7 @@ containing a value of this type.
         public static final int dialog=0x7f060010;
         public static final int disableHome=0x7f06000a;
         public static final int dropdown=0x7f060011;
-        public static final int dummy_button=0x7f060046;
+        public static final int dummy_button=0x7f060047;
         public static final int edMessage=0x7f060044;
         public static final int edNumber=0x7f060043;
         public static final int edit_query=0x7f060035;
@@ -1741,7 +1741,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060028;
         public static final int expanded_menu=0x7f06002e;
         public static final int fullscreen_content=0x7f060041;
-        public static final int fullscreen_content_controls=0x7f060045;
+        public static final int fullscreen_content_controls=0x7f060046;
         public static final int home=0x7f060015;
         public static final int homeAsUp=0x7f060007;
         public static final int icon=0x7f06002c;
@@ -1775,6 +1775,7 @@ containing a value of this type.
         public static final int tabMode=0x7f060003;
         public static final int title=0x7f06002d;
         public static final int top_action_bar=0x7f060023;
+        public static final int tvDebug=0x7f060045;
         public static final int tvStatus=0x7f060042;
         public static final int up=0x7f060016;
         public static final int useLogo=0x7f060005;

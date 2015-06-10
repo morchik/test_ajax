@@ -63,6 +63,15 @@
             android:maxLength="255"
             android:textSize="18sp" >
         </EditText>
+
+        <TextView
+            android:id="@+id/tvDebug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/text_message"
+            android:textColor="#00b5e5"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <FrameLayout
