@@ -11,7 +11,6 @@
 
     <EditTextPreference
         android:key="y_phone"
-        android:summary="Your TELE2.kz phone number"
         android:title="@string/t_your_phone" >
     </EditTextPreference>
     <EditTextPreference

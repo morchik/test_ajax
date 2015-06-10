@@ -73,13 +73,12 @@ public class FullscreenActivity extends Activity {
 	private TextView tvStatus, tvDebug;
 
 	protected void onResume() {
-		Boolean b_debug = sp.getBoolean("chb_debug", false);
+		//Boolean b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
-		String s_temp = "Your number:7072282999 sms left:15";
+		String s_temp = PrefActivity.getStringInDefaultLocale(R.string.text_status, this);
 		String text = s_temp.replace("7072282999", sy_phone);
-		if (b_debug)
-			text = text.replace("15", sy_pass);
+		//if (b_debug)			text = text.replace("15", sy_pass);
 		tvStatus.setText(text);
 		
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")){
@@ -236,9 +235,9 @@ public class FullscreenActivity extends Activity {
 							+ edMessage.getEditableText().toString() + "\"}" });
 
 			try {
-				SystemClock.sleep(800);
-				tvDebug.setText(task2.get());
-				tvStatus.setText(task.get());
+				SystemClock.sleep(500);
+				tvDebug.setText(task.get()+"\n"+tvDebug.toString());
+				tvDebug.setText(task2.get()+"\n"+tvDebug.toString());
 			} catch (InterruptedException | ExecutionException e) {
 				Log.e("click", e.toString());
 				e.printStackTrace();

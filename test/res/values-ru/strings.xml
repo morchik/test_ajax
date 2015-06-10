@@ -8,7 +8,7 @@
     <string name="text_number">Номер телефона:</string>
     <string name="text_message">Текст SMS сообщения:</string>
     <string name="text_hint_number">7071234567</string>
-    <string name="text_status">Ваш номер:7072282999 осталось sms:15</string>
+    <string name="text_status">Ваш номер:7072282999 Oст.sms:15</string>
     <string name="t_your_phone">Ваш номер телефона tele2.kz</string>
 
 </resources>
