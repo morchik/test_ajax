@@ -68,20 +68,21 @@ public class FullscreenActivity extends Activity {
 	}
 
 	private String sy_phone, sy_pass;
+	Boolean b_debug;
 	private SharedPreferences sp;
 	private SystemUiHider mSystemUiHider;
 	private EditText edNumber, edMessage;
 	private TextView tvStatus, tvDebug;
 
 	protected void onResume() {
-		//Boolean b_debug = sp.getBoolean("chb_debug", false);
+		b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
 		String s_temp = PrefActivity.getStringInDefaultLocale(R.string.text_status, this);
 		String text = s_temp.replace("7072282999", sy_phone);
-		//if (b_debug)			text = text.replace("15", sy_pass);
 		tvStatus.setText(text);
-		
+		if (b_debug)
+			tvDebug.setText(sy_phone+" "+sy_pass+"\n"+tvDebug.getText().toString());		
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")){
 			String ssend_phone = sp.getString("s_phone", "");
 			edNumber.setText(ssend_phone);
@@ -239,10 +240,12 @@ public class FullscreenActivity extends Activity {
 				SystemClock.sleep(500);
 				Toast.makeText(
 						this,
-						"resp="+task2.get(),
+						"resp="+task2.get()+task2.get(),
 						Toast.LENGTH_SHORT).show();
-				tvDebug.setText(task.get()+"\n"+tvDebug.getText().toString());
-				tvDebug.setText(task2.get()+"\n"+tvDebug.getText().toString());
+				if (b_debug){
+					tvDebug.setText(task.get()+"\n"+tvDebug.getText().toString());
+					tvDebug.setText(task2.get()+"\n"+tvDebug.getText().toString());					
+				}
 			} catch (InterruptedException | ExecutionException e) {
 				Log.e("click", e.toString());
 				e.printStackTrace();
