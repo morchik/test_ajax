@@ -1733,13 +1733,15 @@ containing a value of this type.
         public static final int dialog=0x7f050010;
         public static final int disableHome=0x7f05000a;
         public static final int dropdown=0x7f050011;
-        public static final int dummy_button=0x7f050043;
+        public static final int dummy_button=0x7f050045;
+        public static final int edMessage=0x7f050043;
+        public static final int edNumber=0x7f050042;
         public static final int edit_query=0x7f050035;
         public static final int end=0x7f050014;
         public static final int expand_activities_button=0x7f050028;
         public static final int expanded_menu=0x7f05002e;
         public static final int fullscreen_content=0x7f050041;
-        public static final int fullscreen_content_controls=0x7f050042;
+        public static final int fullscreen_content_controls=0x7f050044;
         public static final int home=0x7f050015;
         public static final int homeAsUp=0x7f050007;
         public static final int icon=0x7f05002c;
@@ -1898,6 +1900,9 @@ containing a value of this type.
         public static final int app_name=0x7f0a0010;
         public static final int dummy_button=0x7f0a0011;
         public static final int dummy_content=0x7f0a0012;
+        public static final int text_hint_number=0x7f0a0015;
+        public static final int text_message=0x7f0a0014;
+        public static final int text_number=0x7f0a0013;
     }
     public static final class style {
         /** 

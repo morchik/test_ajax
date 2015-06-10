@@ -5,21 +5,28 @@
     android:background="#0099cc"
     tools:context="com.example.test.FullscreenActivity" >
 
-    <!--
-         The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc.
-    -->
-
     <LinearLayout
+        android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:keepScreenOn="true"
+            android:text="@string/text_number"
+            android:textColor="#33b5e5"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/text_hint_number"
+            android:inputType="numberSigned"
             android:maxLength="10"
             android:textSize="16sp" >
 
@@ -27,12 +34,11 @@
         </EditText>
 
         <TextView
-            android:id="@+id/fullscreen_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:keepScreenOn="true"
-            android:text="@string/dummy_content"
+            android:text="@string/text_message"
             android:textColor="#33b5e5"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -42,15 +48,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="255"
+            android:hint="@string/dummy_content"
             android:textSize="16sp" >
 
             <requestFocus />
         </EditText>
     </LinearLayout>
-    <!--
-         This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows.
-    -->
 
     <FrameLayout
         android:layout_width="match_parent"
