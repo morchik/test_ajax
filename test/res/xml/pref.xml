@@ -10,21 +10,19 @@
     </CheckBoxPreference>
 
     <EditTextPreference
-        android:defaultValue="7072282999"
-        android:dialogTitle="Your phone number"
         android:key="y_phone"
         android:summary="Your TELE2.kz phone number"
-        android:title="Phone" >
+        android:title="@string/t_your_phone" >
     </EditTextPreference>
     <EditTextPreference
-        android:defaultValue="756489"
+        android:defaultValue=""
         android:dialogTitle="Password"
         android:key="y_pass"
         android:summary="Password from &apos;private office&apos; tele2.kz"
         android:title="Password tele2.kz" >
     </EditTextPreference>
     <EditTextPreference
-        android:defaultValue="7071355145"
+        android:defaultValue=""
         android:dialogTitle="send phone number"
         android:key="s_phone"
         android:summary="send TELE2.kz phone number"

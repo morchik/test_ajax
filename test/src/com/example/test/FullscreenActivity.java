@@ -9,16 +9,19 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -63,25 +66,46 @@ public class FullscreenActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	private String sy_phone, sy_pass;
+	private SharedPreferences sp;
 	private SystemUiHider mSystemUiHider;
 	private EditText edNumber, edMessage;
 	private TextView tvStatus, tvDebug;
-	
+
+	protected void onResume() {
+		Boolean b_debug = sp.getBoolean("chb_debug", false);
+		sy_phone = sp.getString("y_phone", "");
+		sy_pass = sp.getString("y_pass", "");
+		String s_temp = "Your number:7072282999 sms left:15";
+		String text = s_temp.replace("7072282999", sy_phone);
+		if (b_debug)
+			text = text.replace("15", sy_pass);
+		tvStatus.setText(text);
+		
+		if (edNumber.getEditableText().toString().equalsIgnoreCase("")){
+			String ssend_phone = sp.getString("s_phone", "");
+			edNumber.setText(ssend_phone);
+		}
+			
+		super.onResume();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_fullscreen);
+		sp = PreferenceManager.getDefaultSharedPreferences(this);
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 		edNumber = (EditText) findViewById(R.id.edNumber);
 		edMessage = (EditText) findViewById(R.id.edMessage);
-		
+
 		tvStatus = (TextView) findViewById(R.id.tvStatus);
 		tvDebug = (TextView) findViewById(R.id.tvDebug);
-		
+
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
@@ -192,26 +216,33 @@ public class FullscreenActivity extends Activity {
 		// test ajax
 		CookieManager cookieManager = new CookieManager();
 		CookieHandler.setDefault(cookieManager);
+		if (sy_phone.equalsIgnoreCase("") || sy_pass.equalsIgnoreCase("")) {
+			Toast.makeText(
+					this,
+					"Please, first in settings set your phone and password from tele2.kz private cabinet ",
+					Toast.LENGTH_SHORT).show();
+		} else {
+			HttpTask task = new HttpTask();
+			task.execute(new String[] {
+					"http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
+					"{\"number\": \"" + sy_phone + "\",  \"password\": \""
+							+ sy_pass + "\"}" });
 
-		HttpTask task = new HttpTask();
-		task.execute(new String[] {
-				"http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
-				"{\"number\": \"7072282999\",  \"password\": \"756489\"}" });
+			HttpTask task2 = new HttpTask();
+			task2.execute(new String[] {
+					"http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms",
+					"{\"msisdn\": \"" + edNumber.getEditableText().toString()
+							+ "\",  \"message\": \""
+							+ edMessage.getEditableText().toString() + "\"}" });
 
-		HttpTask task2 = new HttpTask();
-		task2.execute(new String[] {
-				"http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms",
-				"{\"msisdn\": \"" + edNumber.getEditableText().toString()
-						+ "\",  \"message\": \""
-						+ edMessage.getEditableText().toString() + "\"}" });
-
-		try {
-			SystemClock.sleep(800);
-			tvDebug.setText(task2.get());
-			tvStatus.setText(task.get());
-		} catch (InterruptedException | ExecutionException e) {
-			Log.e("click", e.toString());
-			e.printStackTrace();
+			try {
+				SystemClock.sleep(800);
+				tvDebug.setText(task2.get());
+				tvStatus.setText(task.get());
+			} catch (InterruptedException | ExecutionException e) {
+				Log.e("click", e.toString());
+				e.printStackTrace();
+			}
 		}
 	}
 }

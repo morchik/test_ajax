@@ -1903,6 +1903,7 @@ containing a value of this type.
         public static final int dummy_button=0x7f0b0011;
         public static final int dummy_content=0x7f0b0013;
         public static final int settings=0x7f0b0012;
+        public static final int t_your_phone=0x7f0b0018;
         public static final int text_hint_number=0x7f0b0016;
         public static final int text_message=0x7f0b0015;
         public static final int text_number=0x7f0b0014;

@@ -9,5 +9,6 @@
     <string name="text_message">Text SMS message:</string>
     <string name="text_hint_number">7071234567</string>
     <string name="text_status">Your number:7072282999 sms left:15</string>
-
+    <string name="t_your_phone">Your phone number tele2.kz</string>
+    
 </resources>
