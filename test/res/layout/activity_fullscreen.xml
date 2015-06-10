@@ -9,7 +9,19 @@
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:keepScreenOn="true"
         android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:keepScreenOn="true"
+            android:text="@string/text_status"
+            android:textColor="#88b5e5"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -47,8 +59,8 @@
             android:id="@+id/edMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="255"
             android:hint="@string/dummy_content"
+            android:maxLength="255"
             android:textSize="18sp" >
         </EditText>
     </LinearLayout>

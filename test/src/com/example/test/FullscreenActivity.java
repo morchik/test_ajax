@@ -2,18 +2,20 @@ package com.example.test;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
-
 import com.example.test.util.SystemUiHider;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
-
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -49,20 +51,28 @@ public class FullscreenActivity extends Activity {
 	/**
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem mi = menu.add(0, 1, 0, R.string.settings);
+		mi.setIntent(new Intent(this, PrefActivity.class));
+		return super.onCreateOptionsMenu(menu);
+	}
+
 	private SystemUiHider mSystemUiHider;
-	private  EditText edNumber, edMessage;
-	
+	private EditText edNumber, edMessage;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_fullscreen);
-		
+
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 		edNumber = (EditText) findViewById(R.id.edNumber);
 		edMessage = (EditText) findViewById(R.id.edMessage);
-		
+
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
@@ -168,25 +178,24 @@ public class FullscreenActivity extends Activity {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
-	
-	
+
 	public void click(View view) {
 		// test ajax
 		CookieManager cookieManager = new CookieManager();
 		CookieHandler.setDefault(cookieManager);
-		
+
 		HttpTask task = new HttpTask();
-		task.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
-				"{\"number\": \"7072282999\",  \"password\": \"756489\"}" });	
-		
+		task.execute(new String[] {
+				"http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
+				"{\"number\": \"7072282999\",  \"password\": \"756489\"}" });
+
 		HttpTask task2 = new HttpTask();
-		task2.execute(new String[] { "http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms", 
-		"{\"msisdn\": \"" 
-				+edNumber.getEditableText().toString()
-				+ "\",  \"message\": \"" 
-				+edMessage.getEditableText().toString()
-				+ "\"}"});
-		//"ASP.NET_SessionId=ki4pdjxfu5hpp3ke0zwigvid"});
- 
+		task2.execute(new String[] {
+				"http://www.almaty.tele2.kz/WebServices/smsService.asmx/SendSms",
+				"{\"msisdn\": \"" + edNumber.getEditableText().toString()
+						+ "\",  \"message\": \""
+						+ edMessage.getEditableText().toString() + "\"}" });
+		// "ASP.NET_SessionId=ki4pdjxfu5hpp3ke0zwigvid"});
+
 	}
 }
