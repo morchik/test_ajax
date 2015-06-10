@@ -5,8 +5,6 @@ import java.net.CookieManager;
 import java.util.concurrent.ExecutionException;
 
 import com.example.test.util.SystemUiHider;
-
-import android.R;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
