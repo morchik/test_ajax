@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Отправить SMS Tele2.kz</string>
+    <string name="dummy_button">Отправить Sms</string>
+    <string name="settings">Настройки</string>
+    <string name="dummy_content">Привет</string>
+    <string name="text_number">Номер телефона:</string>
+    <string name="text_message">Текст SMS сообщения:</string>
+    <string name="text_hint_number">7071234567</string>
+    <string name="text_status">Ваш номер:7072282999 осталось sms:15</string>
+
+</resources>

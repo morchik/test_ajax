@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">test</string>
+    <string name="app_name">Send SMS Tele2.kz</string>
     <string name="dummy_button">Send Sms</string>
     <string name="settings">Settings</string>
     <string name="dummy_content">Hi</string>
-    <string name="text_number">Phone\nnumber:</string>
-    <string name="text_message">SMS message:</string>
+    <string name="text_number">Phone number:</string>
+    <string name="text_message">Text SMS message:</string>
     <string name="text_hint_number">7071234567</string>
-    <string name="text_status">nbr:7072282999 sms:15</string>
+    <string name="text_status">Your number:7072282999 sms left:15</string>
 
 </resources>
