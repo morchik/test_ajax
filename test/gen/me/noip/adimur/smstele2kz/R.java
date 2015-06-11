@@ -22,7 +22,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int black_overlay=0x7f050000;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int drawer_shadow=0x7f020000;
+        public static final int ic_drawer=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
         public static final int dummy_button=0x7f080006;
@@ -30,6 +32,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int edNumber=0x7f080003;
         public static final int fullscreen_content=0x7f080000;
         public static final int fullscreen_content_controls=0x7f080005;
+        public static final int sett_button=0x7f080007;
         public static final int tvDebug=0x7f080004;
         public static final int tvStatus=0x7f080001;
     }

@@ -95,9 +95,16 @@
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 android:onClick="click"
                 android:text="@string/dummy_button" />
+            <ImageButton
+                android:id="@+id/sett_button"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@android:drawable/ic_menu_preferences"
+                android:onClick="click"/>
         </LinearLayout>
     </FrameLayout>
 
