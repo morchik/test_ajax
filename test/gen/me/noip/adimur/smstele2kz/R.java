@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.test;
+package me.noip.adimur.smstele2kz;
 
 public final class R {
     public static final class attr {
@@ -26,8 +26,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int dummy_button=0x7f080006;
-        public static final int edMessage=0x7f080003;
-        public static final int edNumber=0x7f080002;
+        public static final int edMessage=0x7f080002;
+        public static final int edNumber=0x7f080003;
         public static final int fullscreen_content=0x7f080000;
         public static final int fullscreen_content_controls=0x7f080005;
         public static final int tvDebug=0x7f080004;
@@ -84,8 +84,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarButtonStyle com.example.test:metaButtonBarButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarStyle com.example.test:metaButtonBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarButtonStyle me.noip.adimur.smstele2kz:metaButtonBarButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarStyle me.noip.adimur.smstele2kz:metaButtonBarStyle}</code></td><td></td></tr>
            </table>
            @see #ButtonBarContainerTheme_metaButtonBarButtonStyle
            @see #ButtonBarContainerTheme_metaButtonBarStyle
@@ -94,23 +94,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f010000, 0x7f010001
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.test.R.attr#metaButtonBarButtonStyle}
+          <p>This symbol is the offset where the {@link me.noip.adimur.smstele2kz.R.attr#metaButtonBarButtonStyle}
           attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.test:metaButtonBarButtonStyle
+          @attr name me.noip.adimur.smstele2kz:metaButtonBarButtonStyle
         */
         public static final int ButtonBarContainerTheme_metaButtonBarButtonStyle = 1;
         /**
-          <p>This symbol is the offset where the {@link com.example.test.R.attr#metaButtonBarStyle}
+          <p>This symbol is the offset where the {@link me.noip.adimur.smstele2kz.R.attr#metaButtonBarStyle}
           attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.test:metaButtonBarStyle
+          @attr name me.noip.adimur.smstele2kz:metaButtonBarStyle
         */
         public static final int ButtonBarContainerTheme_metaButtonBarStyle = 0;
     };

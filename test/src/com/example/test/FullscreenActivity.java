@@ -3,6 +3,7 @@ package com.example.test;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.util.concurrent.ExecutionException;
+import me.noip.adimur.smstele2kz.R;
 
 import com.example.test.util.SystemUiHider;
 import android.annotation.SuppressLint;

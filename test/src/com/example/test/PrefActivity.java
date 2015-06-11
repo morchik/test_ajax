@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.DisplayMetrics;
+import me.noip.adimur.smstele2kz.R;
 
 public class PrefActivity extends PreferenceActivity {
 
