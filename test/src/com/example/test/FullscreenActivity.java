@@ -216,6 +216,9 @@ public class FullscreenActivity extends Activity {
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
 
+	public void click_set(View view) {
+		startActivity(new Intent(this, PrefActivity.class));
+	}
 	public void click(View view) {
 		// test ajax
 		CookieManager cookieManager = new CookieManager();
@@ -240,9 +243,20 @@ public class FullscreenActivity extends Activity {
 							+ edMessage.getEditableText().toString() + "\"}" });
 
 			try {
-				SystemClock.sleep(500);
-				Toast.makeText(this, "resp=" + task2.get() + task2.get(),
-						Toast.LENGTH_SHORT).show();
+				SystemClock.sleep(100);
+				String success = json_par.test_a(task.get());
+				if (!success.equalsIgnoreCase("true"))
+					Toast.makeText(this, getString(R.string.text_err_login)+" " + task.get() ,
+						Toast.LENGTH_LONG).show();
+				else{
+					String send = json_par.test_s(task2.get());
+					if (!success.equalsIgnoreCase("true"))
+						Toast.makeText(this, send+" " + task.get() ,
+							Toast.LENGTH_LONG).show();
+					else
+						tvDebug.setText(getString(R.string.text_suc_send)+ "\n"
+								+ tvDebug.getText().toString());
+				}
 				if (b_debug) {
 					tvDebug.setText(task.get() + "\n"
 							+ tvDebug.getText().toString());

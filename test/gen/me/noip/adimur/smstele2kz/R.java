@@ -48,10 +48,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int t_send_phone=0x7f06000a;
         public static final int t_your_pass=0x7f060009;
         public static final int t_your_phone=0x7f060008;
+        public static final int text_err_login=0x7f06000c;
         public static final int text_hint_number=0x7f060006;
         public static final int text_message=0x7f060005;
         public static final int text_number=0x7f060004;
         public static final int text_status=0x7f060007;
+        public static final int text_suc_send=0x7f06000d;
     }
     public static final class style {
         /** 
