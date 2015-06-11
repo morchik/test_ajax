@@ -79,8 +79,8 @@ public class FullscreenActivity extends Activity {
 		b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
-		String s_temp = PrefActivity.getStringInDefaultLocale(
-				R.string.text_status, this);
+		String s_temp = getString(R.string.text_status);
+		//PrefActivity.getStringInDefaultLocale(R.string.text_status, this);
 		String text = s_temp.replace("7072282999", sy_phone);
 		tvStatus.setText(text);
 		if (b_debug)

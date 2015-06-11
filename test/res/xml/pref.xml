@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="chb_debug"
-        android:summaryOff="off"
-        android:summaryOn="on"
-        android:title="Debug mode" >
-    </CheckBoxPreference>
-
     <EditTextPreference
         android:key="y_phone"
         android:title="@string/t_your_phone" >
     </EditTextPreference>
     <EditTextPreference
-        android:defaultValue=""
-        android:dialogTitle="Password"
         android:key="y_pass"
-        android:summary="Password from &apos;private office&apos; tele2.kz"
-        android:title="Password tele2.kz" >
+        android:title="@string/t_your_pass" >
     </EditTextPreference>
     <EditTextPreference
-        android:defaultValue=""
-        android:dialogTitle="send phone number"
         android:key="s_phone"
-        android:summary="send TELE2.kz phone number"
-        android:title="Phone to send" >
+        android:title="@string/t_send_phone" >
     </EditTextPreference>
+    
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="chb_debug"
+        android:title="@string/t_debug_mode" >
+    </CheckBoxPreference>
 
+    
 </PreferenceScreen>

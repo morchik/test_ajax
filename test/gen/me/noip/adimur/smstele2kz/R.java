@@ -41,6 +41,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int dummy_button=0x7f060001;
         public static final int dummy_content=0x7f060003;
         public static final int settings=0x7f060002;
+        public static final int t_debug_mode=0x7f06000b;
+        public static final int t_send_phone=0x7f06000a;
+        public static final int t_your_pass=0x7f060009;
         public static final int t_your_phone=0x7f060008;
         public static final int text_hint_number=0x7f060006;
         public static final int text_message=0x7f060005;
