@@ -25,6 +25,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int drawer_shadow=0x7f020000;
         public static final int ic_drawer=0x7f020001;
         public static final int ic_launcher=0x7f020002;
+        public static final int ic_launcher0=0x7f020003;
     }
     public static final class id {
         public static final int dummy_button=0x7f080006;
@@ -52,6 +53,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int text_hint_number=0x7f060006;
         public static final int text_message=0x7f060005;
         public static final int text_number=0x7f060004;
+        public static final int text_pass_corct=0x7f06000e;
+        public static final int text_sms_left=0x7f06000f;
         public static final int text_status=0x7f060007;
         public static final int text_suc_send=0x7f06000d;
     }

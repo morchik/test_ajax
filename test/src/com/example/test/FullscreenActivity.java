@@ -2,6 +2,7 @@ package com.example.test;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import me.noip.adimur.smstele2kz.R;
 
@@ -11,6 +12,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -80,18 +83,22 @@ public class FullscreenActivity extends Activity {
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
 		String s_temp = getString(R.string.text_status);
-		//PrefActivity.getStringInDefaultLocale(R.string.text_status, this);
 		String text = s_temp.replace("7072282999", sy_phone);
 		tvStatus.setText(text);
-		if (b_debug)
-			tvDebug.setText(sy_phone + " " + sy_pass + "\n"
-					+ tvDebug.getText().toString());
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")) {
 			String ssend_phone = sp.getString("s_phone", "");
 			edNumber.setText(ssend_phone);
 		}
-
 		super.onResume();
+		try{
+		SensorManager mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+		List<Sensor> sensors = mgr.getSensorList(Sensor.TYPE_ALL);
+		for (Sensor sensor : sensors) {
+		        Log.v("", ""+sensor.getName());
+		}
+		}catch(Exception e){
+			Log.e("", e.toString());
+		}
 	}
 
 	@Override
@@ -99,6 +106,7 @@ public class FullscreenActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
+		
 		setContentView(R.layout.activity_fullscreen);
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -246,16 +254,24 @@ public class FullscreenActivity extends Activity {
 				SystemClock.sleep(100);
 				String success = json_par.test_a(task.get());
 				if (!success.equalsIgnoreCase("true"))
-					Toast.makeText(this, getString(R.string.text_err_login)+" " + task.get() ,
-						Toast.LENGTH_LONG).show();
+					//Toast.makeText(this, getString(R.string.text_err_login),Toast.LENGTH_SHORT).show();
+					tvDebug.setText(getString(R.string.text_err_login) +"\n"
+						+ tvDebug.getText().toString());
 				else{
+					tvDebug.setText(getString(R.string.text_pass_corct) +"\n"
+							+ tvDebug.getText().toString());
 					String send = json_par.test_s(task2.get());
-					if (!success.equalsIgnoreCase("true"))
+					if (!send.equalsIgnoreCase("true")){
 						Toast.makeText(this, send+" " + task.get() ,
 							Toast.LENGTH_LONG).show();
-					else
+						tvDebug.setText(send+ "\n" + tvDebug.getText().toString());
+					}else{
 						tvDebug.setText(getString(R.string.text_suc_send)+ "\n"
 								+ tvDebug.getText().toString());
+						String amn = json_par.get_AmountSmsLeft(task2.get());
+						tvDebug.setText(getString(R.string.text_sms_left)+ " "+ amn +"\n"
+							+ tvDebug.getText().toString());
+					}
 				}
 				if (b_debug) {
 					tvDebug.setText(task.get() + "\n"

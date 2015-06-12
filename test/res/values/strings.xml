@@ -8,12 +8,14 @@
     <string name="text_number">Phone number:</string>
     <string name="text_message">Text SMS message:</string>
     <string name="text_hint_number">7071234567</string>
-    <string name="text_status">Your number:7072282999 sms left:15</string>
+    <string name="text_status">Your number:7072282999</string>
     <string name="t_your_phone">Your phone number tele2.kz</string>
     <string name="t_your_pass">Password from private cabinet tele2.kz</string>
     <string name="t_send_phone">Default phone number to send SMS tele2.kz</string>
     <string name="t_debug_mode">Debug mode print </string>
     <string name="text_err_login">Error login pls, check number,password and internet</string>
     <string name="text_suc_send">Your sms sended</string>
-
+    <string name="text_pass_corct">Your number and password correct</string>
+    <string name="text_sms_left"> SMS left </string>
+    
 </resources>

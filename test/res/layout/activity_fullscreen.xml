@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@drawable/ic_launcher0"
     tools:context="com.example.test.FullscreenActivity" >
 
     <LinearLayout
@@ -30,7 +30,7 @@
             android:keepScreenOn="true"
             android:text="@string/text_message"
             android:textColor="#33b5e5"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -68,11 +68,12 @@
             android:id="@+id/tvDebug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:gravity="left"
             android:maxLines="9999"
             android:scrollbars="vertical"
-            android:textColor="#00b5e5"
-            android:textSize="14sp" />
+            android:textColor="#33b5e5"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <FrameLayout
@@ -98,13 +99,14 @@
                 android:layout_weight="15"
                 android:onClick="click"
                 android:text="@string/dummy_button" />
+
             <ImageButton
                 android:id="@+id/sett_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/btn_star_big_off"
-                android:onClick="click_set"/>
+                android:onClick="click_set"
+                android:src="@android:drawable/btn_star_big_off" />
         </LinearLayout>
     </FrameLayout>
 
