@@ -243,13 +243,20 @@ public class FullscreenActivity extends Activity {
 		if (sy_phone.equalsIgnoreCase("") || sy_pass.equalsIgnoreCase("")) {
 			Toast.makeText(this, getString(R.string.text_err_sett),
 					Toast.LENGTH_SHORT).show();
+			tvDebug.setText(getString(R.string.text_err_sett) + "\n"
+					+ tvDebug.getText().toString());
 		} else if ((sy_phone.length() != 10)
 				|| (edNumber.getEditableText().toString().length() != 10)) {
 			Toast.makeText(this, getString(R.string.text_err_num10),
 					Toast.LENGTH_SHORT).show();
-		} else if (isOnline()) {
-			tvDebug.setText((new Date()).toGMTString() + "\n"
+			tvDebug.setText(getString(R.string.text_err_num10) + "\n"
 					+ tvDebug.getText().toString());
+		} else if (edMessage.getEditableText().toString().length() < 1) {
+			Toast.makeText(this, getString(R.string.text_err_msg0),
+					Toast.LENGTH_SHORT).show();
+			tvDebug.setText(getString(R.string.text_err_msg0) + "\n"
+					+ tvDebug.getText().toString());
+		} else if (isOnline()) {
 			// test ajax
 			CookieManager cookieManager = new CookieManager();
 			CookieHandler.setDefault(cookieManager);
@@ -270,12 +277,12 @@ public class FullscreenActivity extends Activity {
 			try {
 				SystemClock.sleep(100);
 				String success = json_par.test_a(task.get());
-				if (!success.equalsIgnoreCase("true"))
-					// Toast.makeText(this,
-					// getString(R.string.text_err_login),Toast.LENGTH_SHORT).show();
+				if (!success.equalsIgnoreCase("true")) {
+					Toast.makeText(this, getString(R.string.text_err_login),
+							Toast.LENGTH_SHORT).show();
 					tvDebug.setText(getString(R.string.text_err_login) + "\n"
 							+ tvDebug.getText().toString());
-				else {
+				} else {
 					tvDebug.setText(getString(R.string.text_pass_corct) + "\n"
 							+ tvDebug.getText().toString());
 					String send = json_par.test_s(task2.get());
@@ -309,5 +316,7 @@ public class FullscreenActivity extends Activity {
 			tvDebug.setText(getString(R.string.text_err_online) + "\n"
 					+ tvDebug.getText().toString());
 		}
+		tvDebug.setText((new Date()).toGMTString() + "\n"
+				+ tvDebug.getText().toString());
 	}
 }

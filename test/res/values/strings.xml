@@ -20,5 +20,6 @@
     <string name="text_err_online"> Not connected to the internet </string>
     <string name="text_err_num10"> Phone number have to be 10 digits </string>
     <string name="text_err_sett">Please, first in settings set your phone and password from tele2.kz private cabinet</string>
+    <string name="text_err_msg0">Message text cannot be empty</string>
     
 </resources>
