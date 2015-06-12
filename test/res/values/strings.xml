@@ -17,5 +17,8 @@
     <string name="text_suc_send">Your sms sended</string>
     <string name="text_pass_corct">Your number and password correct</string>
     <string name="text_sms_left"> SMS left </string>
+    <string name="text_err_online"> Not connected to the internet </string>
+    <string name="text_err_num10"> Phone number have to be 10 digits </string>
+    <string name="text_err_sett">Please, first in settings set your phone and password from tele2.kz private cabinet</string>
     
 </resources>

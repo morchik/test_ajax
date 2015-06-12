@@ -2,6 +2,7 @@ package com.example.test;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import me.noip.adimur.smstele2kz.R;
@@ -10,10 +11,13 @@ import com.example.test.util.SystemUiHider;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -90,15 +94,22 @@ public class FullscreenActivity extends Activity {
 			edNumber.setText(ssend_phone);
 		}
 		super.onResume();
-		try{
-		SensorManager mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-		List<Sensor> sensors = mgr.getSensorList(Sensor.TYPE_ALL);
-		for (Sensor sensor : sensors) {
-		        Log.v("", ""+sensor.getName());
-		}
-		}catch(Exception e){
+		try {
+			SensorManager mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+			List<Sensor> sensors = mgr.getSensorList(Sensor.TYPE_ALL);
+			for (Sensor sensor : sensors) {
+				Log.v("", "" + sensor.getName());
+
+			}
+		} catch (Exception e) {
 			Log.e("", e.toString());
 		}
+	}
+
+	public boolean isOnline() {
+		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		return (networkInfo != null && networkInfo.isConnected());
 	}
 
 	@Override
@@ -106,7 +117,6 @@ public class FullscreenActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
-		
 		setContentView(R.layout.activity_fullscreen);
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -227,16 +237,23 @@ public class FullscreenActivity extends Activity {
 	public void click_set(View view) {
 		startActivity(new Intent(this, PrefActivity.class));
 	}
+
+	@SuppressWarnings("deprecation")
 	public void click(View view) {
-		// test ajax
-		CookieManager cookieManager = new CookieManager();
-		CookieHandler.setDefault(cookieManager);
 		if (sy_phone.equalsIgnoreCase("") || sy_pass.equalsIgnoreCase("")) {
-			Toast.makeText(
-					this,
-					"Please, first in settings set your phone and password from tele2.kz private cabinet ",
+			Toast.makeText(this, getString(R.string.text_err_sett),
 					Toast.LENGTH_SHORT).show();
-		} else {
+		} else if ((sy_phone.length() != 10)
+				|| (edNumber.getEditableText().toString().length() != 10)) {
+			Toast.makeText(this, getString(R.string.text_err_num10),
+					Toast.LENGTH_SHORT).show();
+		} else if (isOnline()) {
+			tvDebug.setText((new Date()).toGMTString() + "\n"
+					+ tvDebug.getText().toString());
+			// test ajax
+			CookieManager cookieManager = new CookieManager();
+			CookieHandler.setDefault(cookieManager);
+
 			HttpTask task = new HttpTask();
 			task.execute(new String[] {
 					"http://www.almaty.tele2.kz/WebServices/authenticate.asmx/Authenticate",
@@ -254,23 +271,25 @@ public class FullscreenActivity extends Activity {
 				SystemClock.sleep(100);
 				String success = json_par.test_a(task.get());
 				if (!success.equalsIgnoreCase("true"))
-					//Toast.makeText(this, getString(R.string.text_err_login),Toast.LENGTH_SHORT).show();
-					tvDebug.setText(getString(R.string.text_err_login) +"\n"
-						+ tvDebug.getText().toString());
-				else{
-					tvDebug.setText(getString(R.string.text_pass_corct) +"\n"
+					// Toast.makeText(this,
+					// getString(R.string.text_err_login),Toast.LENGTH_SHORT).show();
+					tvDebug.setText(getString(R.string.text_err_login) + "\n"
+							+ tvDebug.getText().toString());
+				else {
+					tvDebug.setText(getString(R.string.text_pass_corct) + "\n"
 							+ tvDebug.getText().toString());
 					String send = json_par.test_s(task2.get());
-					if (!send.equalsIgnoreCase("true")){
-						Toast.makeText(this, send+" " + task.get() ,
-							Toast.LENGTH_LONG).show();
-						tvDebug.setText(send+ "\n" + tvDebug.getText().toString());
-					}else{
-						tvDebug.setText(getString(R.string.text_suc_send)+ "\n"
+					if (!send.equalsIgnoreCase("true")) {
+						Toast.makeText(this, send + " " + task.get(),
+								Toast.LENGTH_LONG).show();
+						tvDebug.setText(send + "\n"
 								+ tvDebug.getText().toString());
+					} else {
+						tvDebug.setText(getString(R.string.text_suc_send)
+								+ "\n" + tvDebug.getText().toString());
 						String amn = json_par.get_AmountSmsLeft(task2.get());
-						tvDebug.setText(getString(R.string.text_sms_left)+ " "+ amn +"\n"
-							+ tvDebug.getText().toString());
+						tvDebug.setText(getString(R.string.text_sms_left) + " "
+								+ amn + "\n" + tvDebug.getText().toString());
 					}
 				}
 				if (b_debug) {
@@ -283,6 +302,12 @@ public class FullscreenActivity extends Activity {
 				Log.e("click", e.toString());
 				e.printStackTrace();
 			}
+
+		} else {
+			Toast.makeText(this, getString(R.string.text_err_online),
+					Toast.LENGTH_SHORT).show();
+			tvDebug.setText(getString(R.string.text_err_online) + "\n"
+					+ tvDebug.getText().toString());
 		}
 	}
 }
