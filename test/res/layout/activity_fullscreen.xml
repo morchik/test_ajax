@@ -20,8 +20,7 @@
             android:keepScreenOn="true"
             android:text="@string/text_status"
             android:textColor="#88b5e5"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="12sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -30,16 +29,15 @@
             android:keepScreenOn="true"
             android:text="@string/text_message"
             android:textColor="#33b5e5"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/edMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dummy_content"
-            android:maxLength="255"
-            android:textSize="18sp" >
+            android:maxLength="160"
+            android:textSize="16sp" >
 
             <requestFocus />
         </EditText>
@@ -51,8 +49,7 @@
             android:keepScreenOn="true"
             android:text="@string/text_number"
             android:textColor="#33b5e5"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/edNumber"
@@ -61,7 +58,7 @@
             android:hint="@string/text_hint_number"
             android:inputType="numberSigned"
             android:maxLength="10"
-            android:textSize="20sp" >
+            android:textSize="14sp" >
         </EditText>
 
         <TextView
@@ -73,7 +70,7 @@
             android:maxLines="9999"
             android:scrollbars="vertical"
             android:textColor="#33b5e5"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <FrameLayout
