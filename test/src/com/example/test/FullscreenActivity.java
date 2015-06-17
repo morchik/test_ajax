@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutionException;
 import me.noip.adimur.smstele2kz.R;
 
 import com.example.test.util.SystemUiHider;
+import com.example.test.util.rsa;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -318,5 +320,13 @@ public class FullscreenActivity extends Activity {
 		}
 		tvDebug.setText((new Date()).toGMTString() + "\n"
 				+ tvDebug.getText().toString());
+		
+		try{
+			rsa.main();
+		}catch(Exception e){
+			tvDebug.setText((new Date()).toGMTString()+ "\n" 
+					+ e.toString()+ "\n"
+					+ tvDebug.getText().toString());
+		}
 	}
 }
