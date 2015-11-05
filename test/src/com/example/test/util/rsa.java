@@ -36,7 +36,7 @@ public class rsa {
 				.generatePublic(pubKeySpec);
 		RSAPrivateKey privKey = (RSAPrivateKey) keyFactory
 				.generatePrivate(privKeySpec);
-	*/
+		*/
 		SecureRandom random = new SecureRandom();
 	    KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA", "BC");
 

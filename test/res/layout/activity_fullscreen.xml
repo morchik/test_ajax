@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dummy_content"
-            android:maxLength="160"
+            android:maxLength="140"
             android:textSize="18sp" >
 
             <requestFocus />
