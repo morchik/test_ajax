@@ -21,5 +21,7 @@
     <string name="text_err_num10">Номера телефонов должны быть 10 цифр </string>
     <string name="text_err_sett">Пожалуйста сначала в настройках установите ваш номер телефона и пароль от личного кабинета tele2.kz</string>
     <string name="text_err_msg0">Текст сообщения не может быть пустым</string>
+    <string name="text_start_send">пытаемся отправить смс...</string>
+    <string name="text_finish_send">результат попытки отправки смс</string>
     
 </resources>
