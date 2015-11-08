@@ -9,47 +9,38 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 import javax.crypto.Cipher;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+@SuppressLint({ "DefaultLocale" })
 public class CryptoUtil {
 
 	public static final String ALGORITHM = "RSA";
 	public static final String PRIVATE_KEY_FILE = "private.key";
 	public static final String PUBLIC_KEY_FILE = "public.key";
 
-	public static void generateKey() {
+	@SuppressLint("TrulyRandom")
+	public static void generateKey(Context cnt) {
 		try {
 			final KeyPairGenerator keyGen = KeyPairGenerator
 					.getInstance(ALGORITHM, "BC");
 			keyGen.initialize(2048, new SecureRandom());
 			final KeyPair key = keyGen.generateKeyPair();
 
-			File privateKeyFile = new File(PRIVATE_KEY_FILE);
-			File publicKeyFile = new File(PUBLIC_KEY_FILE);
-
-			if (privateKeyFile.getParentFile() != null) {
-				privateKeyFile.getParentFile().mkdirs();
-			}
-			privateKeyFile.createNewFile();
-
-			if (publicKeyFile.getParentFile() != null) {
-				publicKeyFile.getParentFile().mkdirs();
-			}
-			publicKeyFile.createNewFile();
+			FileOutputStream privateKeyFile = cnt.openFileOutput(PRIVATE_KEY_FILE, Context.MODE_PRIVATE);
+			FileOutputStream publicKeyFile = cnt.openFileOutput(PUBLIC_KEY_FILE, Context.MODE_PRIVATE);
 
 			BufferedWriter pubOut = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(publicKeyFile)));
+					publicKeyFile));
 			pubOut.write(byte2Hex(key.getPublic().getEncoded()));
 			pubOut.flush();
 			pubOut.close();
 
 			BufferedWriter privOut = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(privateKeyFile)));
+					privateKeyFile));
 			privOut.write(byte2Hex(key.getPrivate().getEncoded()));
 			privOut.flush();
 			privOut.close();
-			System.out.print(publicKeyFile.getAbsolutePath());
-			System.out.println(" " + privateKeyFile.length());
-			System.out.print(publicKeyFile.getAbsolutePath());
-			System.out.println(" " + privateKeyFile.length());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,9 +71,9 @@ public class CryptoUtil {
 		return new String(dectyptedText);
 	}
 
-	private static byte[] fileToKey(String file) throws IOException {
+	private static byte[] fileToKey(Context cnt, String file) throws IOException {
 		BufferedReader pubIn = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file)));
+				cnt.openFileInput(file)));
 		StringBuilder sb = new StringBuilder();
 		String tmp;
 		do {
@@ -94,44 +85,45 @@ public class CryptoUtil {
 		return hex2Byte(sb.toString());
 	}
 
-	private static PublicKey restorePublic() throws IOException,
+	private static PublicKey restorePublic(Context cnt) throws IOException,
 			NoSuchAlgorithmException, InvalidKeySpecException {
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
 		EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(
-				fileToKey(PUBLIC_KEY_FILE));
+				fileToKey(cnt, PUBLIC_KEY_FILE));
 		return keyFactory.generatePublic(publicKeySpec);
 	}
 
-	private static PrivateKey restorePrivate() throws IOException,
+	private static PrivateKey restorePrivate(Context cnt) throws IOException,
 			NoSuchAlgorithmException, InvalidKeySpecException {
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
 		EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(
-				fileToKey(PRIVATE_KEY_FILE));
+				fileToKey(cnt, PRIVATE_KEY_FILE));
 		return keyFactory.generatePrivate(privateKeySpec);
 	}
 
-	public static void main() {
+	public static void main(Context cnt) {
 		System.out.println(new Date());
 		try {
 			if (!new File(PRIVATE_KEY_FILE).exists()
 					|| !new File(PUBLIC_KEY_FILE).exists()) {
-				generateKey();
+				generateKey(cnt);
 			}
 			String originalText = "1234567890 test str ";
 			System.out.println(new Date());
 			for (int i = 0; i < 10; i++) {
 				originalText += "1234567890 tEst" + i + "str "
 						+ "1234567890 Test stR ";
-				byte[] encryptedText = encrypt(originalText, restorePublic());
+				PublicKey pub = restorePublic(cnt);
+				byte[] encryptedText = encrypt(originalText, pub);
 
-				String plainText = decrypt(encryptedText, restorePrivate());
+				String plainText = decrypt(encryptedText, restorePrivate(cnt));
 
 				System.out.println("Original Text length: "
 						+ originalText.length());
 
 				System.out.println("Original Text: " + originalText);
 				System.out.println("Public key: "
-						+ byte2Hex(restorePublic().getEncoded()));
+						+ byte2Hex(pub.getEncoded()));
 				System.out
 						.println("Encrypted Text: " + byte2Hex(encryptedText));
 				System.out.println("Decrypted Text: " + plainText);

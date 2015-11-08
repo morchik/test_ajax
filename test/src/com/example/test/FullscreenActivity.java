@@ -167,12 +167,6 @@ public class FullscreenActivity extends Activity {
 	}
 
 	public void click_set(View view) {
-		try {
-			CryptoUtil.main();
-		} catch (Exception e) {
-			tvDebug.setText((new Date()) + "\n" + e.toString()
-					+ "\n" + tvDebug.getText().toString());
-		}
 		startActivity(new Intent(this, PrefActivity.class));
 	}
 
