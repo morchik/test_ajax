@@ -1,5 +1,6 @@
 package com.example.test;
 
+import com.example.test.util.*;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.text.SimpleDateFormat;
@@ -7,10 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import me.noip.adimur.smstele2kz.R;
-
-import com.example.test.util.SystemUiHider;
-import com.example.test.util.rsa;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -170,10 +167,15 @@ public class FullscreenActivity extends Activity {
 	}
 
 	public void click_set(View view) {
+		try {
+			CryptoUtil.main();
+		} catch (Exception e) {
+			tvDebug.setText((new Date()) + "\n" + e.toString()
+					+ "\n" + tvDebug.getText().toString());
+		}
 		startActivity(new Intent(this, PrefActivity.class));
 	}
 
-	@SuppressWarnings("deprecation")
 	public void click(View view) {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(edMessage.getWindowToken(), 0);
@@ -222,11 +224,5 @@ public class FullscreenActivity extends Activity {
 		tvDebug.setText("\n" + Dtime 
 				+ " " +getString(R.string.text_start_send)+ "\n"
 				+ tvDebug.getText().toString());
-		try {
-			rsa.main();
-		} catch (Exception e) {
-			tvDebug.setText((new Date()).toGMTString() + "\n" + e.toString()
-					+ "\n" + tvDebug.getText().toString());
-		}
 	}
 }
