@@ -157,7 +157,7 @@ public class FullscreenActivity extends Activity {
 					.format(new Date());
 			tvDebug.setText("\n" + Dtime 
 					+ " " +getString(R.string.text_finish_send)+ "\n"
-					+ edMessage.getEditableText().toString() + "\n"
+					+ MyRsa.encrypt(this, edMessage.getEditableText().toString()) + "\n"
 					+ edNumber.getEditableText().toString() + "\n"
 					+ tvDebug.getText().toString());
 		} catch (InterruptedException | ExecutionException e) {

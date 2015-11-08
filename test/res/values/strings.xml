@@ -23,5 +23,6 @@
     <string name="text_err_msg0">Message text cannot be empty</string>
     <string name="text_start_send">trying send sms</string>
     <string name="text_finish_send">result of sending sms</string>
+    <string name="pub_key">30820122300d06092a864886f70d01010105000382010f003082010a02820101009fde491de233924fb1924d070e20468a36ca5f9a7a022a6e18bec96cdcedf4e7a78e0a142b27a4a3b1a995cc01bf6479ebbafb768a2afb7c10e94519d17eeaa08cc599b3fb35052b493520ff0ccb65bdeed6153fd72b42b60e4c6c5ff815c78a6adc73535c918f0e7e5f17f7c1454ca93671099ab682299cb741e3616ce7c453cf79262ed84a6f1eaf4965fe16b3f51fbe93bf4078a63cd20cf7765bfe0b5d5755ff1a3ea6007f652d764a9747ea872617cb332c4c137f61d616c2a66d2d1e1cc4f1c75320e5ead7aa2430bd938917b04293df97efe2a7737472d377becf89d7a5c8d8378b0201ee9b73241ded29d0aded21c5bdec45a2179a0d28b29c039b4f0203010001</string>
 
 </resources>
