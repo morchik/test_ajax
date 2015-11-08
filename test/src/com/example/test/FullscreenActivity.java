@@ -107,7 +107,9 @@ public class FullscreenActivity extends Activity {
 	public void alert_dlg() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(
 				FullscreenActivity.this);
-		builder.setMessage("data sending...").setPositiveButton("", null);
+		builder.setMessage("data sending...")
+			.setIcon(R.drawable.ic_launcher)
+			.setPositiveButton("", null);
 		alert = builder.create();
 		alert.show();
 	}

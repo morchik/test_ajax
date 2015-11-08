@@ -21,7 +21,7 @@
     <string name="text_err_num10"> Phone number have to be 10 digits </string>
     <string name="text_err_sett">Please, first in settings set your phone and password from tele2.kz private cabinet</string>
     <string name="text_err_msg0">Message text cannot be empty</string>
-    <string name="text_start_send">trying send sms...</string>
+    <string name="text_start_send">trying send sms</string>
     <string name="text_finish_send">result of sending sms</string>
 
 </resources>

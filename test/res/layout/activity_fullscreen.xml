@@ -1,113 +1,99 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fullscreen_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical"
     tools:context="com.example.test.FullscreenActivity" >
 
     <LinearLayout
-        android:id="@+id/fullscreen_content"
+        android:id="@+id/fullscreen_content_controls"
+        style="?metaButtonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:keepScreenOn="true"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
 
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/dummy_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
+            android:layout_weight="15"
+            android:onClick="click"
+            android:text="@string/dummy_button" />
 
-            <Button
-                android:id="@+id/dummy_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="15"
-                android:onClick="click"
-                android:text="@string/dummy_button" />
-
-            <ImageButton
-                android:id="@+id/sett_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/settings"
-                android:onClick="click_set"
-                android:src="@android:drawable/btn_star_big_off" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/sett_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:keepScreenOn="true"
-            android:text="@string/text_message"
-            android:textColor="#33b5e5"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/edMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/dummy_content"
-            android:maxLength="140"
-            android:textSize="18sp" >
-
-            <requestFocus />
-        </EditText>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:keepScreenOn="true"
-            android:text="@string/text_number"
-            android:textColor="#33b5e5"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/edNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_hint_number"
-            android:inputType="numberSigned"
-            android:maxLength="10"
-            android:textSize="18sp" >
-        </EditText>
-
-        <TextView
-            android:id="@+id/tvDebug"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:gravity="left"
-            android:hint="@string/dummy_content"
-            android:maxLines="9999"
-            android:scrollbars="vertical"
-            android:textColor="#33b5e5"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher0"
-            android:gravity="left"
-            android:keepScreenOn="true"
-            android:text="@string/text_status"
-            android:textColor="#88b5e5"
-            android:textSize="14sp" />
+            android:layout_weight="1"
+            android:contentDescription="@string/settings"
+            android:onClick="click_set"
+            android:src="@android:drawable/btn_star_big_off" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvRest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text="@string/text_message"
+        android:textColor="#33b5e5"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/edMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dummy_content"
+        android:maxLength="140"
+        android:textSize="18sp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text="@string/text_number"
+        android:textColor="#33b5e5"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/edNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/text_hint_number"
+        android:inputType="numberSigned"
+        android:maxLength="10"
+        android:textSize="18sp" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/tvDebug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fffff8"
+        android:gravity="left"
+        android:hint="@string/dummy_content"
+        android:maxLines="9999"
+        android:scrollbars="vertical"
+        android:textColor="#33b5e5"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_launcher0"
         android:gravity="left"
         android:keepScreenOn="true"
+        android:text="@string/text_status"
         android:textColor="#88b5e5"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
-</RelativeLayout>
+</LinearLayout>
