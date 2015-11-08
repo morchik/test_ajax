@@ -22,7 +22,6 @@
 
             <Button
                 android:id="@+id/dummy_button"
-                style="?metaButtonBarStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
@@ -35,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/settings"
+                android:onClick="click_set"
                 android:src="@android:drawable/btn_star_big_off" />
         </LinearLayout>
 
@@ -93,11 +93,21 @@
             android:id="@+id/tvStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher0"
             android:gravity="left"
             android:keepScreenOn="true"
             android:text="@string/text_status"
             android:textColor="#88b5e5"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:keepScreenOn="true"
+        android:textColor="#88b5e5"
+        android:textSize="12sp" />
 
 </RelativeLayout>
