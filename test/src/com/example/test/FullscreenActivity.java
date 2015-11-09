@@ -53,21 +53,23 @@ public class FullscreenActivity extends Activity {
 	Boolean b_debug;
 	private SharedPreferences sp;
 	private EditText edNumber, edMessage;
-	private TextView tvStatus, tvDebug;
+	private TextView tvDebug;
 
 	protected void onResume() {
 		b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
 		
-		String s_temp = getString(R.string.text_status);
-		String text = s_temp.replace("7072282999", sy_phone);
-		tvStatus.setText(text);
+		tvDebug.setText(sp.getString("log_debug", ""));
+		
+		String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z").format(new Date());
+		tvDebug.setText(Dtime + "\n" + tvDebug.getText().toString());
+		
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")) {
 			String ssend_phone = sp.getString("s_phone", "");
 			edNumber.setText(ssend_phone);
 		}
-		tvDebug.setText(sp.getString("log_debug", ""));
+		
 		super.onResume();
 		/*
 		try {
@@ -105,7 +107,6 @@ public class FullscreenActivity extends Activity {
 		edNumber = (EditText) findViewById(R.id.edNumber);
 		edMessage = (EditText) findViewById(R.id.edMessage);
 
-		tvStatus = (TextView) findViewById(R.id.tvStatus);
 		tvDebug = (TextView) findViewById(R.id.tvDebug);
 		tvDebug.setMovementMethod(new ScrollingMovementMethod());
 
