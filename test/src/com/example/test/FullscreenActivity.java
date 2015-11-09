@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
@@ -58,6 +59,7 @@ public class FullscreenActivity extends Activity {
 		b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
+		
 		String s_temp = getString(R.string.text_status);
 		String text = s_temp.replace("7072282999", sy_phone);
 		tvStatus.setText(text);
@@ -65,17 +67,25 @@ public class FullscreenActivity extends Activity {
 			String ssend_phone = sp.getString("s_phone", "");
 			edNumber.setText(ssend_phone);
 		}
+		tvDebug.setText(sp.getString("log_debug", ""));
 		super.onResume();
+		/*
 		try {
 			SensorManager mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			List<Sensor> sensors = mgr.getSensorList(Sensor.TYPE_ALL);
 			for (Sensor sensor : sensors) {
-				Log.v("", "" + sensor.getName());
-
+				tvDebug.setText(sensor.getName() + "\n"
+						+ tvDebug.getText().toString());
 			}
 		} catch (Exception e) {
 			Log.e("", e.toString());
-		}
+		}*/
+	}
+	protected void onPause() {
+	    Editor ed = sp.edit();
+	    ed.putString("log_debug", tvDebug.getText().toString());
+	    ed.commit();	
+	    super.onPause();
 	}
 
 	public boolean isOnline() {
@@ -143,7 +153,6 @@ public class FullscreenActivity extends Activity {
 					String amn = json_par.get_AmountSmsLeft(task2.get());
 					tvDebug.setText(getString(R.string.text_sms_left) + " "
 							+ amn + "\n"
-							+ edMessage.getEditableText().toString() + "\n"
 							+ tvDebug.getText().toString());
 				}
 			}
@@ -157,7 +166,7 @@ public class FullscreenActivity extends Activity {
 					.format(new Date());
 			tvDebug.setText("\n" + Dtime 
 					+ " " +getString(R.string.text_finish_send)+ "\n"
-					+ MyRsa.encrypt(this, edMessage.getEditableText().toString()) + "\n"
+					+ edMessage.getEditableText().toString() + "\n"
 					+ edNumber.getEditableText().toString() + "\n"
 					+ tvDebug.getText().toString());
 		} catch (InterruptedException | ExecutionException e) {
@@ -167,6 +176,7 @@ public class FullscreenActivity extends Activity {
 	}
 
 	public void click_set(View view) {
+		Log.v("MyRsa", MyRsa.encrypt(this, edMessage.getEditableText().toString()));
 		startActivity(new Intent(this, PrefActivity.class));
 	}
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.noip.adimur.smstele2kz"
-    android:versionCode="014"
-    android:versionName="0.14" >
+    android:versionCode="015"
+    android:versionName="0.15" >
 
     <uses-sdk
         android:minSdkVersion="11"

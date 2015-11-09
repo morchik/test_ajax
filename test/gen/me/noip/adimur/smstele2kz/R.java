@@ -34,8 +34,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fullscreen_content=0x7f080000;
         public static final int fullscreen_content_controls=0x7f080001;
         public static final int sett_button=0x7f080003;
-        public static final int tvDebug=0x7f080006;
-        public static final int tvStatus=0x7f080007;
+        public static final int tvDebug=0x7f080007;
+        public static final int tvStatus=0x7f080006;
     }
     public static final class layout {
         public static final int activity_fullscreen=0x7f030000;

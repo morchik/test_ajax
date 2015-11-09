@@ -32,6 +32,8 @@ public class MyRsa {
 	}
 
 	public static String encrypt(Context cnt, String text) {
+		if (text.length() > 240)
+			text = text.substring(0, 240);
 		try {
 			return CryptoUtil.byte2Hex(CryptoUtil.encrypt(text, getPublicKey(cnt)));
 		} catch (NoSuchAlgorithmException e) {
