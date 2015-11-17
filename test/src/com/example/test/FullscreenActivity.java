@@ -5,7 +5,6 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import me.noip.adimur.smstele2kz.R;
 import android.annotation.SuppressLint;
@@ -15,8 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -62,8 +59,8 @@ public class FullscreenActivity extends Activity {
 		
 		tvDebug.setText(sp.getString("log_debug", ""));
 		
-		String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z").format(new Date());
-		tvDebug.setText(Dtime + "\n" + tvDebug.getText().toString());
+		// String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z").format(new Date());
+		// tvDebug.setText(Dtime + "\n" + tvDebug.getText().toString());
 		
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")) {
 			String ssend_phone = sp.getString("s_phone", "");

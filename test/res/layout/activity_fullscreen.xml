@@ -73,12 +73,15 @@
         android:textSize="18sp" >
     </EditText>
 
-    <TextView
+    <EditText
         android:id="@+id/tvDebug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:textIsSelectable="false"
         android:background="#fffff8"
         android:gravity="left"
+        android:hint="@string/text_hint_number"
         android:maxLines="9999"
         android:scrollbars="vertical"
         android:textColor="#33b5e5"
