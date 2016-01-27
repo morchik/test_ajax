@@ -62,9 +62,9 @@ public class FullscreenActivity extends Activity {
 	 * intent.
 	 */
 	@Override
-	public void onNewIntent(Intent intent){
-	    super.onNewIntent(intent);
-	    setIntent(intent);
+	public void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent); // important
 	}
 
 	protected void onResume() {
@@ -75,22 +75,28 @@ public class FullscreenActivity extends Activity {
 		tvDebug.setText(sp.getString("log_debug", ""));
 
 		// получаем Intent, который вызывал это Activity
-	    Intent intent = getIntent();
-	    // читаем из него action
-	    String action = intent.getAction();
-	    if (action.equalsIgnoreCase("android.intent.action.SENDTO")){
-		    String dstr = intent.getData().getSchemeSpecificPart();
-		    dstr = dstr.replace(" ", "");
-		    dstr = dstr.replace("+", "");
-		    dstr = dstr.replace("-", "");
-		    dstr = dstr.substring(Math.max(1, dstr.length()-10), dstr.length());
-		    String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z").format(new Date());
-		    tvDebug.setText(dstr+"  -< "+Dtime+ "\n" + tvDebug.getText().toString());
-		    edNumber.setText(dstr);
-	    }
-	
+		Intent intent = getIntent();
+		if (intent != null) {
+			// читаем из него action
+			String action = intent.getAction();
+			if (action.equalsIgnoreCase("android.intent.action.SENDTO")) {
+				String dstr = intent.getData().getSchemeSpecificPart();
+				dstr = dstr.replace(" ", "");
+				dstr = dstr.replace("+", "");
+				dstr = dstr.replace("-", "");
+				dstr = dstr.substring(Math.max(1, dstr.length() - 10),
+						dstr.length());
+				String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z")
+						.format(new Date());
+				tvDebug.setText(dstr + "  -< " + Dtime + "\n"
+						+ tvDebug.getText().toString());
+				edNumber.setText(dstr);
+				setIntent(null);
+			}
+		}
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")) {
 			String ssend_phone = sp.getString("s_phone", "");
+			// from settings
 			edNumber.setText(ssend_phone);
 		}
 
@@ -188,9 +194,8 @@ public class FullscreenActivity extends Activity {
 			tvDebug.setText("\n" + Dtime + " "
 					+ getString(R.string.text_finish_send) + "\n"
 					+ edMessage.getEditableText().toString() + "\n"
-					+ edNumber.getEditableText().toString() 
-					+ " <- "+sy_phone + "\n"
-					+ tvDebug.getText().toString());
+					+ edNumber.getEditableText().toString() + " <- " + sy_phone
+					+ "\n" + tvDebug.getText().toString());
 			save_sms(edMessage.getEditableText().toString(), edNumber
 					.getEditableText().toString());
 		} catch (InterruptedException | ExecutionException e) {
@@ -211,7 +216,7 @@ public class FullscreenActivity extends Activity {
 
 		ContentValues values = new ContentValues();
 		values.put("address", sms_number);
-		values.put("body", sms_text+" <- "+sy_phone);
+		values.put("body", sms_text + " <- " + sy_phone);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
 			this.getContentResolver().insert(Telephony.Sms.Sent.CONTENT_URI,
