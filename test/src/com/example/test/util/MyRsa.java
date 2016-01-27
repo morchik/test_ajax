@@ -17,7 +17,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
-import me.noip.adimur.smstele2kz.R;
+import me.noip.tele2kz.R;
 
 public class MyRsa {
 

@@ -37,6 +37,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:gravity="center"
         android:keepScreenOn="true"
         android:text="@string/text_message"
@@ -48,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/dummy_content"
+        android:keepScreenOn="true"
         android:maxLength="140"
         android:textSize="18sp" >
 
@@ -69,6 +71,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/text_hint_number"
         android:inputType="numberSigned"
+        android:keepScreenOn="true"
         android:maxLength="10"
         android:textSize="18sp" >
     </EditText>
@@ -77,14 +80,15 @@
         android:id="@+id/tvDebug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:textIsSelectable="false"
+        android:layout_weight="2"
         android:background="#fffff8"
         android:gravity="left"
         android:hint="@string/text_hint_number"
+        android:inputType="textMultiLine"
         android:maxLines="9999"
         android:scrollbars="vertical"
         android:textColor="#33b5e5"
+        android:textIsSelectable="false"
         android:textSize="14sp" />
 
 </LinearLayout>

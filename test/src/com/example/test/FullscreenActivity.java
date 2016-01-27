@@ -6,18 +6,22 @@ import java.net.CookieManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
-import me.noip.adimur.smstele2kz.R;
+import me.noip.tele2kz.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Telephony;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -56,35 +60,34 @@ public class FullscreenActivity extends Activity {
 		b_debug = sp.getBoolean("chb_debug", false);
 		sy_phone = sp.getString("y_phone", "");
 		sy_pass = sp.getString("y_pass", "");
-		
+
 		tvDebug.setText(sp.getString("log_debug", ""));
-		
-		// String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z").format(new Date());
+
+		// String Dtime = new
+		// SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z").format(new Date());
 		// tvDebug.setText(Dtime + "\n" + tvDebug.getText().toString());
-		
+
 		if (edNumber.getEditableText().toString().equalsIgnoreCase("")) {
 			String ssend_phone = sp.getString("s_phone", "");
 			edNumber.setText(ssend_phone);
 		}
-		
+
 		super.onResume();
 		/*
-		try {
-			SensorManager mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-			List<Sensor> sensors = mgr.getSensorList(Sensor.TYPE_ALL);
-			for (Sensor sensor : sensors) {
-				tvDebug.setText(sensor.getName() + "\n"
-						+ tvDebug.getText().toString());
-			}
-		} catch (Exception e) {
-			Log.e("", e.toString());
-		}*/
+		 * try { SensorManager mgr = (SensorManager)
+		 * getSystemService(SENSOR_SERVICE); List<Sensor> sensors =
+		 * mgr.getSensorList(Sensor.TYPE_ALL); for (Sensor sensor : sensors) {
+		 * tvDebug.setText(sensor.getName() + "\n" +
+		 * tvDebug.getText().toString()); } } catch (Exception e) { Log.e("",
+		 * e.toString()); }
+		 */
 	}
+
 	protected void onPause() {
-	    Editor ed = sp.edit();
-	    ed.putString("log_debug", tvDebug.getText().toString());
-	    ed.commit();	
-	    super.onPause();
+		Editor ed = sp.edit();
+		ed.putString("log_debug", tvDebug.getText().toString());
+		ed.commit();
+		super.onPause();
 	}
 
 	public boolean isOnline() {
@@ -112,9 +115,8 @@ public class FullscreenActivity extends Activity {
 	public void alert_dlg() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(
 				FullscreenActivity.this);
-		builder.setMessage("data sending...")
-			.setIcon(R.drawable.ic_launcher)
-			.setPositiveButton("", null);
+		builder.setMessage("data sending...").setIcon(R.drawable.ic_launcher)
+				.setPositiveButton("", null);
 		alert = builder.create();
 		alert.show();
 	}
@@ -125,7 +127,8 @@ public class FullscreenActivity extends Activity {
 				alert.cancel();
 			if (last_activity != null)
 				last_activity.finish_task();
-		};
+		}
+		;
 	}
 
 	public void finish_task() {
@@ -150,8 +153,7 @@ public class FullscreenActivity extends Activity {
 							+ tvDebug.getText().toString());
 					String amn = json_par.get_AmountSmsLeft(task2.get());
 					tvDebug.setText(getString(R.string.text_sms_left) + " "
-							+ amn + "\n"
-							+ tvDebug.getText().toString());
+							+ amn + "\n" + tvDebug.getText().toString());
 				}
 			}
 			if (b_debug) {
@@ -162,11 +164,13 @@ public class FullscreenActivity extends Activity {
 			}
 			String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z")
 					.format(new Date());
-			tvDebug.setText("\n" + Dtime 
-					+ " " +getString(R.string.text_finish_send)+ "\n"
+			tvDebug.setText("\n" + Dtime + " "
+					+ getString(R.string.text_finish_send) + "\n"
 					+ edMessage.getEditableText().toString() + "\n"
 					+ edNumber.getEditableText().toString() + "\n"
 					+ tvDebug.getText().toString());
+			save_sms(edMessage.getEditableText().toString(), edNumber
+					.getEditableText().toString());
 		} catch (InterruptedException | ExecutionException e) {
 			Log.e("click", e.toString());
 			e.printStackTrace();
@@ -174,32 +178,48 @@ public class FullscreenActivity extends Activity {
 	}
 
 	public void click_set(View view) {
-		Log.v("MyRsa", MyRsa.encrypt(this, edMessage.getEditableText().toString()));
+		Log.v("MyRsa",
+				MyRsa.encrypt(this, edMessage.getEditableText().toString()));
 		startActivity(new Intent(this, PrefActivity.class));
 	}
 
+	@SuppressLint("NewApi")
+	public void save_sms(String sms_text, String sms_number) {
+		final String SENT_SMS_CONTENT_PROVIDER_URI_OLDER_API_19 = "content://sms/sent";
+
+		ContentValues values = new ContentValues();
+		values.put("address", sms_number);
+		values.put("body", sms_text+" <- "+sy_phone);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+			this.getContentResolver().insert(Telephony.Sms.Sent.CONTENT_URI,
+					values);
+		else
+			this.getContentResolver().insert(
+					Uri.parse(SENT_SMS_CONTENT_PROVIDER_URI_OLDER_API_19),
+					values);
+	}
+
 	public void click(View view) {
+		/*
+		 * ContentValues values = new ContentValues(); values.put("address",
+		 * "+77071355145"); values.put("body", "foo bar");
+		 * getContentResolver().insert(Uri.parse("content://sms/sent"), values);
+		 */
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(edMessage.getWindowToken(), 0);
 		if (sy_phone.equalsIgnoreCase("") || sy_pass.equalsIgnoreCase("")) {
-			// Toast.makeText(this, getString(R.string.text_err_sett),
-			// Toast.LENGTH_SHORT).show();
 			tvDebug.setText(getString(R.string.text_err_sett) + "\n"
 					+ tvDebug.getText().toString());
 		} else if ((sy_phone.length() != 10)
 				|| (edNumber.getEditableText().toString().length() != 10)) {
-			// Toast.makeText(this, getString(R.string.text_err_num10),
-			// Toast.LENGTH_SHORT).show();
 			tvDebug.setText(getString(R.string.text_err_num10) + "\n"
 					+ tvDebug.getText().toString());
 		} else if (edMessage.getEditableText().toString().length() < 1) {
-			// Toast.makeText(this, getString(R.string.text_err_msg0),
-			// Toast.LENGTH_SHORT).show();
 			tvDebug.setText(getString(R.string.text_err_msg0) + "\n"
 					+ tvDebug.getText().toString());
 		} else if (isOnline()) {
 			alert_dlg();
-			// test ajax
 			CookieManager cookieManager = new CookieManager();
 			CookieHandler.setDefault(cookieManager);
 
@@ -215,16 +235,15 @@ public class FullscreenActivity extends Activity {
 					"{\"msisdn\": \"" + edNumber.getEditableText().toString()
 							+ "\",  \"message\": \""
 							+ edMessage.getEditableText().toString() + "\"}" });
-		} else {
-			// Toast.makeText(this, getString(R.string.text_err_online),
+		} else { // Toast.makeText(this, getString(R.string.text_err_online),
 			// Toast.LENGTH_SHORT).show();
 			tvDebug.setText(getString(R.string.text_err_online) + "\n"
 					+ tvDebug.getText().toString());
 		}
 		String Dtime = new SimpleDateFormat("yyyy.MM.dd   HH:mm:ss z")
 				.format(new Date());
-		tvDebug.setText("\n" + Dtime 
-				+ " " +getString(R.string.text_start_send)+ "\n"
+		tvDebug.setText("\n" + Dtime + " "
+				+ getString(R.string.text_start_send) + "\n"
 				+ tvDebug.getText().toString());
 	}
 }
